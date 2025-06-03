@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import requests
@@ -8,7 +7,7 @@ import plotly.express as px
 # --- Page Config ---
 st.set_page_config(page_title="B2B Digital Strategy Dashboard", layout="wide")
 st.title("📊 B2B Strategic Insights from High-Volume Transactions")
-st.markdown("This dashboard analyzes performance, trends, and partner insights from large-scale CSV files hosted on Google Drive.")
+st.markdown("This dashboard analyzes performance, trends, and partner insights from large-scale CSV files hosted on Dropbox.")
 
 # --- Dropdown for Module Selection ---
 module = st.selectbox("Choose Analysis Module", [
@@ -19,11 +18,11 @@ module = st.selectbox("Choose Analysis Module", [
     "Download Filtered Dataset"
 ])
 
-# --- Load Data from Google Drive ---
+# --- Load Data from Dropbox ---
 @st.cache_data
-def load_large_data_from_drive():
-    url_oct = "https://drive.google.com/uc?export=download&id=1diBWJtQdM6EOn3Vf-5vF7NTvkibCxOA9"
-    url_nov = "https://drive.google.com/uc?export=download&id=1Q4IGeFzVYqauOJ0DBHPRfCZAEcHltNmW"
+def load_large_data_from_dropbox():
+    url_oct = "https://www.dropbox.com/scl/fi/p82bygz1w3ro3c2k7dbqn/2019-Oct.csv?rlkey=5iqsg7446b3tx2bf31lqt2whf&st=pdcwny0y&raw=1"
+    url_nov = "https://www.dropbox.com/scl/fi/h1kapi9jp0d2j4suqmald/2019-Nov.csv?rlkey=5z8u105ow5jxhzyqqgar68173&st=ad9btmvv&raw=1"
 
     def fetch_csv(url):
         response = requests.get(url)
@@ -37,7 +36,7 @@ def load_large_data_from_drive():
     df = df.dropna(subset=['Date'])
     return df
 
-df = load_large_data_from_drive()
+df = load_large_data_from_dropbox()
 
 # --- Module 1: Executive Dashboard ---
 if module == "Executive Dashboard":
